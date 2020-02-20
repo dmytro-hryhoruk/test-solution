@@ -1,29 +1,11 @@
 package mate.academy;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import org.apache.log4j.Logger;
 
 public class Solution {
-    private static final Logger LOGGER = Logger.getLogger(Solution.class);
-
-    public List<String> convertFileIntoList(File file) {
-        try {
-            return Files.lines(Paths.get(file.getAbsolutePath()))
-                    .collect(Collectors.toList());
-        } catch (IOException e) {
-            LOGGER.error("No such file", e);
-            return Collections.emptyList();
-        }
-    }
 
     public List<String> findConcatenatedWordsFormList(List<String> list) {
         Set<String> set = new HashSet<>(list);
@@ -38,14 +20,24 @@ public class Solution {
         return result;
     }
 
-    public String findTheLongestString(List<String> stringList) {
+    public List<String> findTwoLongestStrings(List<String> stringList) {
         int indexMaxLength = 0;
+        int indexSecondLength = 0;
+        List<String> result = new ArrayList<>();
+
         for (int i = 1; i < stringList.size(); i++) {
             if (stringList.get(i).length() > stringList.get(indexMaxLength).length()) {
+                indexSecondLength = indexMaxLength;
                 indexMaxLength = i;
             }
+            if (stringList.get(i).length() > stringList.get(indexSecondLength).length()
+                    && stringList.get(i).length() != stringList.get(indexMaxLength).length()) {
+                indexSecondLength = i;
+            }
         }
-        return stringList.get(indexMaxLength);
+        result.add(stringList.get(indexMaxLength));
+        result.add(stringList.get(indexSecondLength));
+        return result;
     }
 
     private boolean isConcatenated(String word, Set<String> set) {
