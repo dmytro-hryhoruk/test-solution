@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 
 public class App {
-    private static final String CONTENT_ROOT_PATH = "src/main/resources/";
     private Solution solution;
     private Converter converter;
 
@@ -14,9 +13,9 @@ public class App {
     }
 
     public void launchApp(String fileName) {
-        File file = new File(CONTENT_ROOT_PATH + fileName);
+        File file = new File(fileName);
         List<String> listFromFile = converter.convertFileIntoList(file);
-        System.out.println("\nAmount of words in " + fileName + " = " + listFromFile.size());
+        System.out.println("\nAmount of words in file = " + listFromFile.size());
         List<String> concatenatedWords = solution.findConcatenatedWordsFormList(listFromFile);
         System.out.println("Amount of concatenated words = " + concatenatedWords.size());
         List<String> theLongestWords = solution.findTwoLongestStrings(concatenatedWords);
