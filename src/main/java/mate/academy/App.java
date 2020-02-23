@@ -13,10 +13,10 @@ public class App {
         converter = new Converter();
     }
 
-    public void launchApp() {
-        File file = new File(CONTENT_ROOT_PATH + Files.chooseFile());
+    public void launchApp(String fileName) {
+        File file = new File(CONTENT_ROOT_PATH + fileName);
         List<String> listFromFile = converter.convertFileIntoList(file);
-        System.out.println("\nAmount of words in words.txt file = " + listFromFile.size());
+        System.out.println("\nAmount of words in " + fileName + " = " + listFromFile.size());
         List<String> concatenatedWords = solution.findConcatenatedWordsFormList(listFromFile);
         System.out.println("Amount of concatenated words = " + concatenatedWords.size());
         List<String> theLongestWords = solution.findTwoLongestStrings(concatenatedWords);
